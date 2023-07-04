@@ -12,7 +12,7 @@ function Portfolio() {
         </div>
       </a>
       <a
-        href='https://github.com/VeronikaGG/russian-travel'
+        href='https://veronikagg.github.io/russian-travel/index.html'
         className='portfolio__link'
         target='_blank'
         rel='noreferrer'

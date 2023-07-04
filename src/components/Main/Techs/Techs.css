@@ -92,7 +92,7 @@
     line-height: 18px;
   }
   .techs__info {
-    margin: 83px 60px 0;
+    margin-top: 83px;
     grid-auto-rows: 57px;
     grid-template-columns: repeat(auto-fit, 84px);
   }
@@ -123,8 +123,8 @@
     line-height: 16px;
   }
   .techs__info {
-    margin: 50px 0 0 71px;
-    padding-right: 71px;
+    margin-top: 50px;
+    padding: 0 10px;
   }
   .techs-back {
     background-color: #fafafa;

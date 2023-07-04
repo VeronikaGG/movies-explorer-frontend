@@ -96,7 +96,7 @@
 @media screen and (max-width: 880px) {
   .project {
     margin: 90px 50px 104px;
-    padding: 76px 0;
+    padding: 0 0 76px;
   }
   .project__columns {
     margin-top: 69px;
