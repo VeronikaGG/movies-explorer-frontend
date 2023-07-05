@@ -5,7 +5,7 @@ function Portfolio() {
   return (
     <section className='portfolio'>
       <h2 className='portfolio__title'> Портфолио</h2>
-      <a href='https://github.com/VeronikaGG/how-to-learn' className='portfolio__link' target='_blank' rel='noreferrer'>
+      <a href='https://veronikagg.github.io/how-to-learn/' className='portfolio__link' target='_blank' rel='noreferrer'>
         <div className='portfolio__container'>
           <h2 className='portfolio__text'>Статичный сайт</h2>
           <h2 className='portfolio__arrow'>↗</h2>
