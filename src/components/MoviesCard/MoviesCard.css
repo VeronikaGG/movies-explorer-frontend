@@ -20,9 +20,9 @@
 
 .movie__info {
   display: flex;
+  flex: 1;
+  max-width: 85%;
   flex-direction: column;
-  justify-content: left;
-  align-items: center;
   text-align: left;
   box-sizing: border-box;
   row-gap: 9px;
@@ -63,16 +63,20 @@
 }
 
 .movie__save {
-  background-image: url(../../../images/buttom-save_w.svg);
+  background-image: url(../../images/buttom-save_w.svg);
 }
 .movie__save_active {
-  background-image: url(../../../images/buttomsave_active.svg);
+  background-image: url(../../images/buttomsave_active.svg);
 }
 
 .movie__close {
-  background-image: url(../../../images/close.svg);
+  background-image: url(../../images/close.svg);
 }
-
+.movie__hidden {
+  background-image: none;
+  width: 0;
+  height: 0;
+}
 @media screen and (max-width: 880px) {
   .movie__img {
     height: 190px;

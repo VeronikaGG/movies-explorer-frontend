@@ -7,6 +7,7 @@ function Footer() {
     <Routes>
       {['/', '/movies', '/saved-movies'].map((path) => (
         <Route
+          key={path}
           path={path}
           element={
             <footer className='footer'>

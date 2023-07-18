@@ -10,7 +10,7 @@
 .profile__form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 410px;
   height: 417px;
@@ -87,9 +87,11 @@
   line-height: 17px;
   text-align: center;
   color: #ffffff;
-  display: none;
 }
-
+.profile__disabled {
+  background-color: grey;
+  cursor: default;
+}
 .profile__bottom {
   display: flex;
   flex-direction: column;
@@ -97,8 +99,19 @@
   align-items: center;
   margin-top: 17px;
 }
-
+.profile__error {
+  margin: auto 0 20px;
+  height: 16px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #ff3055;
+}
 .profile__link {
+  padding: 0;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  background-color: transparent;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
@@ -110,6 +123,9 @@
 
 .profile__link-red {
   color: #ff3055;
+}
+.profile__hidden {
+  display: none;
 }
 
 @media screen and (max-width: 850px) {
@@ -139,9 +155,6 @@
   }
   .profile__submit {
     width: 260px;
-  }
-  .profile__bottom {
-    margin-top: 170px;
   }
   .profile__link {
     font-size: 12px;

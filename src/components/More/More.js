@@ -1,14 +1,19 @@
-import React from 'react';
-import './More.css';
+import React from "react";
+import "./More.css";
 
-const More = () => {
+const Futher = (props) => {
+  function handleFuther(e) {
+    e.preventDefault();
+    props.onMore();
+  }
+
   return (
-    <section class='more'>
-      <button type='button' class='more__button'>
+    <section className="futher">
+      <button type="button" className="futher__button" onClick={handleFuther}>
         Ещё
       </button>
     </section>
   );
 };
 
-export default More;
+export default Futher;

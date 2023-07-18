@@ -1,16 +1,22 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ErrorPopup.css';
 
-const ErrorPopup = ({ message, onClose }) => {
+const ErrorPopup = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className='error-popup'>
-      <div className='error-popup__content'>
-        <button className='error-popup__close' onClick={onClose}>
-          &times;
-        </button>
-        <p className='error-popup__message'>{message}</p>
-      </div>
-    </div>
+    <section className='error'>
+      <h2 className='erorr__status'>404</h2>
+      <p className='erorr__text'>Страница не найдена</p>
+      <button
+        className='error__button'
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Назад
+      </button>
+    </section>
   );
 };
 
