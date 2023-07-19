@@ -3,7 +3,12 @@ class Auth {
     this._baseUrl = options.BASE_URL;
     this._headers = options.headers;
   }
-
+  _updateHeaders() {
+    this._headers = {
+      ...this._headers,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+  }
   _getResponseData(res) {
     if (res.ok) {
       return res.json();
@@ -21,6 +26,7 @@ class Auth {
   }
 
   register = (email, password, name) => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
@@ -29,6 +35,7 @@ class Auth {
   };
 
   authorize = (email, password) => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
@@ -42,6 +49,7 @@ class Auth {
   };
 
   checkToken = () => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {

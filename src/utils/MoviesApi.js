@@ -1,4 +1,4 @@
-// import { BASE__URL } from '../utils/сonstants';
+import { BASE__URL } from '../utils/сonstants';
 
 class MoviesApi {
   constructor(options) {
@@ -12,20 +12,25 @@ class MoviesApi {
     };
   }
   _getResponseData(res) {
-    if (!res.ok) {
-      return res.json().then((res) => Promise.reject(res));
+    if (res.ok) {
+      return res.json();
     }
-    return res.json();
+    return Promise.reject(res.status);
   }
 
   _request(url, options) {
-    return fetch(url, options).then(this._getResponseData);
+    return fetch(url, options);
   }
+
 
   getUserInfo = () => {
     this._updateHeaders();
     return this._request(`${this._baseUrl}/users/me`, {
       headers: this._headers,
+    }) 
+    .then(this._getResponseData)
+    .then((data) => {
+      return data;
     });
   };
 
@@ -33,10 +38,15 @@ class MoviesApi {
     return this._request(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: this._headers,
+    })
+    .then(this._getResponseData)
+    .then((data) => {
+      return data;
     });
   };
 
   saveMovie = (props) => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: this._headers,
@@ -46,14 +56,15 @@ class MoviesApi {
         duration: props.duration,
         year: props.year,
         description: props.description,
-        image: props.image,
+        image: `${BASE__URL}${props.image.url}`,
         trailerLink: props.trailerLink,
+        thumbnail: `${BASE__URL}${props.image.formats.thumbnail.url}`,
+        movieId: props.id,
         nameRU: props.nameRU,
         nameEN: props.nameEN,
-        thumbnail: props.image.formats.thumbnail.url,
-        movieId: props.id,
       }),
-    });
+    })
+    .then(this._getResponseData);
   };
 
   deleteMovie = (movieId) => {
@@ -71,7 +82,8 @@ class MoviesApi {
         name: props.name,
         email: props.email,
       }),
-    });
+    })
+    .then(this._getResponseData);
   };
 }
 
@@ -79,7 +91,6 @@ const moviesApi = new MoviesApi({
   baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
-    Accept: "application/json",
     authorization: `Bearer ${localStorage.getItem("jwt")}`,
   },
 });

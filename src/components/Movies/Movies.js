@@ -30,7 +30,7 @@ function Movies(props) {
             onSaveMovie={props.onSaveMovie}
           />
         )}
-      {props.onMore && <More onMore={props.onMore} />}
+      {props.Futher && <More Futher={props.Futher} />}
     </>
   );
 }

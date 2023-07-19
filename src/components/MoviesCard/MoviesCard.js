@@ -1,20 +1,21 @@
 import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
-
+import { BASE__URL } from '../../utils/сonstants';
 function MoviesCard(props) {
   let location = useLocation();
 
-  let ButtonSaveClass = `${
-    props.movie.isSaved ? "movie__save_active" : "movie__save"
-  }`;
+  let ButtonSaveClass = `${props.movie.isSaved ? "movie__save_active" : "movie__save"
+    }`;
   let hours = Math.floor(props.movie.duration / 60);
   let min = props.movie.duration - hours * 60;
 
   function handleSaveMovie(e) {
     e.preventDefault();
+    console.log(props.movie); // Добавьте эту строку
     props.onSaveMovie(props.movie);
   }
+
 
   function handleDeleteMovie(e) {
     e.preventDefault();
@@ -33,27 +34,29 @@ function MoviesCard(props) {
         <button
           type="button"
           aria-label="Сохранить"
-          className={`movie__button ${
-            location.pathname === "/movies" ? ButtonSaveClass : "movie__hidden"
-          }`}
+          className={`movie__button ${location.pathname === "/movies" ? ButtonSaveClass : "movie__hidden"
+            }`}
           onClick={handleSaveMovie}
         />
         <button
           type="button"
           aria-label="Сохранить"
-          className={`movie__button ${
-            location.pathname === "/saved-movies"
+          className={`movie__button ${location.pathname === "/saved-movies"
               ? "movie__close"
               : "movie__hidden"
-          }`}
+            }`}
           onClick={handleDeleteMovie}
         />
       </div>
       <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
         <img
           className="movie__img"
-          src={`https://api.nomoreparties.co/${props.movie.image.url}`}
-          alt="movieimage"
+          alt={props.movie.nameRU || props.movie.nameEN}
+          src={
+            props.movie.image && props.movie.image.url
+              ? `${BASE__URL}${props.movie.image.url}`
+              : props.movie.image
+          }
         />
       </a>
     </section>

@@ -12,5 +12,5 @@ export const ADDITIONAL_SMALL_MOVIES_AMOUNT = 2;
 
 // const BASE__URL = "https://api.veronikagg-diploma.nomoredomains.rocks";
 // export const BASE__URL = 'http://localhost:3000';
-export const BASE__URL = 'https://api.nomoreparties.co';
-export const MOVIES__URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const BASE__URL = "https://api.nomoreparties.co";
+export const MOVIES__URL = "https://api.nomoreparties.co/beatfilm-movies";

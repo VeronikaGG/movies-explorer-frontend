@@ -4,7 +4,7 @@ import "./More.css";
 const Futher = (props) => {
   function handleFuther(e) {
     e.preventDefault();
-    props.onMore();
+    props.Futher();
   }
 
   return (
