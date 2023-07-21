@@ -5,14 +5,14 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 function MoviesCardList(props) {
   return (
     <section className="movies">
-      {props.movies?.map((movie) => {
+      {props.movies?.map((movie, index) => {
         return (
           <MoviesCard
-            key={movie.id}
-            movie={movie}
-            onSaveMovie={props.onSaveMovie}
-            onDeleteMovie={props.onDeleteMovie}
-          />
+          key={index}
+          movie={movie}
+          onSaveMovie={props.onSaveMovie}
+          onDeleteMovie={props.onDeleteMovie}
+        />
         );
       })}
     </section>

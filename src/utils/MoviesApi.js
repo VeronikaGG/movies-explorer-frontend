@@ -22,12 +22,11 @@ class MoviesApi {
     return fetch(url, options);
   }
 
-
   getUserInfo = () => {
     this._updateHeaders();
     return this._request(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }) 
+    })
     .then(this._getResponseData)
     .then((data) => {
       return data;
@@ -35,6 +34,7 @@ class MoviesApi {
   };
 
   getSavedMovies = () => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: this._headers,
@@ -58,7 +58,7 @@ class MoviesApi {
         description: props.description,
         image: `${BASE__URL}${props.image.url}`,
         trailerLink: props.trailerLink,
-        thumbnail: `${BASE__URL}${props.image.formats.thumbnail.url}`,
+        thumbnail: `${BASE__URL}${props.url}`,
         movieId: props.id,
         nameRU: props.nameRU,
         nameEN: props.nameEN,
@@ -68,6 +68,7 @@ class MoviesApi {
   };
 
   deleteMovie = (movieId) => {
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
       headers: this._headers,
@@ -88,7 +89,7 @@ class MoviesApi {
 }
 
 const moviesApi = new MoviesApi({
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.veronikagg-diploma.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem("jwt")}`,

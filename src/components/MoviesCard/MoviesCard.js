@@ -12,15 +12,15 @@ function MoviesCard(props) {
 
   function handleSaveMovie(e) {
     e.preventDefault();
-    console.log(props.movie); // Добавьте эту строку
+    console.log(props.movie); // 
     props.onSaveMovie(props.movie);
   }
-
-
+ 
   function handleDeleteMovie(e) {
     e.preventDefault();
     props.onDeleteMovie(props.movie);
   }
+ 
 
   return (
     <section className="movie">
@@ -59,6 +59,9 @@ function MoviesCard(props) {
           }
         />
       </a>
+       {/* <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className="movie__img" src={`https://api.nomoreparties.co/${props.movie.image.url}`} alt="movieimage" />
+      </a> */}
     </section>
   );
 }

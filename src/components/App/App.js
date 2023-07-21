@@ -214,8 +214,8 @@ function App() {
       .then(() => {
         handleLogin(formValue);
       })
-      .catch((err) => {
-        setErrorMessage(err.message);
+      .catch((error) => {
+        setErrorMessage(error.message);
       })
       .finally(() => setIsAuthLoading(false));
   }
