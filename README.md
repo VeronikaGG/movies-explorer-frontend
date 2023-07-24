@@ -5,7 +5,7 @@
 
 Ссылка на сайт: https://veronikagg-diploma.nomoredomains.rocks
 
-Ссылка на пулл-реквест: https://github.com/VeronikaGG/movies-explorer-frontend/tree/level-3
+Ссылка на пулл-реквест: https://github.com/VeronikaGG/movies-explorer-frontend/pull/2
 
 
 
