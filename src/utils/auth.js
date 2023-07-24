@@ -1,6 +1,6 @@
 class Auth {
   constructor(options) {
-    this._baseUrl = options.BASE_URL;
+    this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
   _updateHeaders() {
@@ -49,7 +49,7 @@ class Auth {
   };
 
   checkToken = () => {
-    // this._updateHeaders();
+    this._updateHeaders();
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
@@ -61,7 +61,7 @@ class Auth {
 
 const auth = new Auth({
   // BASE_URL: 'http://localhost:3000',
- BASE_URL: 'https://api.veronikagg-diploma.nomoredomains.rocks',
+  baseUrl: 'https://api.veronikagg-diploma.nomoredomains.rocks',
   headers: {
     'Content-Type': 'application/json',
     authorization: `Bearer ${localStorage.getItem('token')}`,

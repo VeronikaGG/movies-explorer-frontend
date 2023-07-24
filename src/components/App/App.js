@@ -30,6 +30,7 @@ import {
 } from "../../utils/сonstants";
 
 function App() {
+  const [allMovies, setAllMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
@@ -78,54 +79,24 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    setIsPreloaderLoading(true);
-    loggedIn &&
-      Promise.all([
-        moviesApi.getUserInfo(),
-        mainApi.getMovies(),
-        moviesApi.getSavedMovies(),
-      ])
-        .then(([userData, initialMovies, savedArray]) => {
-          setCurrentUser(userData);
-          setMoviesForRender(initialMovies);
-          setSavedMovies(savedArray);
-          // localStorage.setItem('savedMoviesArray', JSON.stringify(savedArray));
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsPreloaderLoading(false));
-  }, [loggedIn]);
 
-  // const localSavedMovies = localStorage.getItem('savedMoviesArray');
-  // useEffect(() => {
-  //   if (localSavedMovies) {
-  //     setSavedMovies(JSON.parse(localSavedMovies));
-  //   }
-  // }, [localSavedMovies]);
-  //----------------------------------------------------
-  // React.useEffect(() => {
-  //   loggedIn &&
-  //     Promise.all([
-  //       mainApi.getUserInfo(),
-  //       moviesApi.getAllMovies(),
-  //       mainApi.getSavedMovies(),
-  //     ])
-  //       .then(([userData, initialMovies, savedArray]) => {
-  //         setCurrentUser(userData);
-  //         setMovies(initialMovies);
-  //         setIsMoviesError(false);
-  //         setSavedMovies(savedArray);
-  //         localStorage.setItem("savedMoviesArray", JSON.stringify(savedArray));
-  //       })
-  //       .catch((err) => {
-  //         console.error(`Ошибка: ${err}`);
-  //         setIsMoviesError(true);
-  //       });
-  // }, [loggedIn]);
+useEffect(() => {
+  setIsPreloaderLoading(true);
+  Promise.all([moviesApi.getUserInfo(), moviesApi.getSavedMovies()])
+    .then(([data, movies]) => {
+      setCurrentUser(data);
+      setSavedMovies(movies);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => setIsPreloaderLoading(false));
+}, [loggedIn]);
+
+
+
+
 
   const handleLogout = () => {
     localStorage.clear();
-    localStorage.removeItem("searchedMoviesSaved");
     setMoviesForRender([]);
     setSavedMovies([]);
     setLoggedIn(false);
@@ -137,36 +108,29 @@ function App() {
     setErrorMessageProfile(false);
     navigate("/", { replace: true });
   };
-  //9999999начало!!
-  // useEffect(() => {
-  //   setIsPreloaderLoading(true);
-  //   Promise.all([moviesApi.getUserInfo(), moviesApi.getSavedMovies()])
-  //     .then(([data, movies]) => {
-  //       setCurrentUser(data.user);
-  //       setSavedMovies(movies);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setIsPreloaderLoading(false));
-  // }, [loggedIn]);
-
   useEffect(() => {
     setIsPreloaderLoading(true);
-    if (location.pathname === "/saved-movies") {
-      moviesApi
-        .getSavedMovies()
-        .then((movies) => {
-          setNothingFoundInSaved("");
-          setIsFilterCheckedInSaved(false);
-          setSavedMovies(movies);
-        })
-        .catch((err) => console.log(err));
-    } else if (location.pathname === "/movies") {
-      if (localStorage.isFilterChecked === "true") {
+    if ((location.pathname === '/')) {
+      mainApi.getMovies() 
+      .then((allMovies) => {
+        setAllMovies(allMovies);
+      })
+      .catch((err) => console.log(err))
+    } else if ((location.pathname === '/saved-movies')) {
+      moviesApi.getSavedMovies()
+      .then((movies) => {
+        setNothingFoundInSaved('');
+        setIsFilterCheckedInSaved(false);
+        setSavedMovies(movies);
+      })
+      .catch((err) => console.log(err));
+    } else if (location.pathname === '/movies') {
+      if (localStorage.isFilterChecked === 'true') {
         setIsFilterChecked(true);
-      } else setIsFilterChecked(false);
-    } else if (location.pathname === "/profile") {
+      } else setIsFilterChecked(false)
+    } else if (location.pathname === '/profile') {
       setIsEditing(false);
-      setErrorMessageProfile("");
+      setErrorMessageProfile('');
     }
     setIsPreloaderLoading(false);
   }, [location]);
@@ -214,8 +178,8 @@ function App() {
       .then(() => {
         handleLogin(formValue);
       })
-      .catch((error) => {
-        setErrorMessage(error.message);
+      .catch((err) => {
+        setErrorMessage(err.message);
       })
       .finally(() => setIsAuthLoading(false));
   }
@@ -464,7 +428,14 @@ function App() {
         />
         <main>
           <Routes>
-            <Route path="/" element={<Main />} />
+          <Route
+            path="/"
+            element={
+              <Main 
+                allMovies={allMovies}
+              />
+            }
+          />
             <Route
               path="/movies"
               element={

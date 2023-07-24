@@ -3,10 +3,6 @@ const isEmail = require('validator/lib/isEmail');
 
 export default function useFormValidation() {
   const [formValue, setFormValue] = useState({});
-  // useState({
-  //   movie: "", // Исходное значение пустое
-  // });
-  useState({});
   const [error, setError] = useState({});
   const [isValid, setIsValid] = useState(false);
 
