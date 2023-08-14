@@ -1,4 +1,4 @@
-.checkbox {
+/* .checkbox {
   display: inline-block;
   height: 14px;
   line-height: 28px;
@@ -51,4 +51,4 @@
 
 .checkbox__input:checked + .checkbox__switch:before {
   transform: translateX(23px);
-}
+} */

@@ -1,6 +1,6 @@
 .promo {
   margin: 0;
-  background: #dddee3;
+  background: #465dff;
   display: flex;
   flex-direction: column;
 }
@@ -13,15 +13,15 @@
   width: 310px;
   height: 304px;
 }
-
 .promo__title {
   max-width: 640px;
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
-  color: #000000;
+  color: #fff;
   margin: 0;
   text-align: left;
+  margin-right: 190px;
 }
 .promo__caption {
   text-align: left;
@@ -30,7 +30,7 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 @media screen and (max-width: 880px) {
   .promo__content {
@@ -59,7 +59,6 @@
     align-items: center;
   }
 }
-
 @media screen and (max-width: 580px) {
   .promo__logo {
     width: 210px;

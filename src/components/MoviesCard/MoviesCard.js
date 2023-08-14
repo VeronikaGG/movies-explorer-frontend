@@ -1,69 +1,77 @@
-import React from "react";
+import { useMemo } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
-import { BASE__URL } from '../../utils/сonstants';
-function MoviesCard(props) {
-  let location = useLocation();
+import { API_URL } from "../../utils/сonstants";
 
-  let ButtonSaveClass = `${props.movie.isSaved ? "movie__save_active" : "movie__save"
-    }`;
-  let hours = Math.floor(props.movie.duration / 60);
-  let min = props.movie.duration - hours * 60;
+const MoviesCard = ({
+  movie,
+  savedMovies,
+  savedMovieList,
+  deleteMovieToList,
+}) => {
+  // Получаем текущий путь из URL для определения режима отображения кнопок
+  const { pathname } = useLocation();
 
-  function handleSaveMovie(e) {
-    e.preventDefault();
-    console.log(props.movie); // 
-    props.onSaveMovie(props.movie);
+  // Функция для конвертации длительности фильма в удобный формат
+  const convertTime = (length) => {
+    if (length >= 60) {
+      return `${Math.floor(length / 60)}ч ${length % 60}м`;
+    }
+    return `${length}м`;
+  };
+
+  // Проверяем, есть ли фильм в списке сохраненных фильмов, используя useMemo
+  const isLiked = useMemo(() => {
+    return savedMovies.some((m) => m.movieId === movie.id);
+  }, [movie, savedMovies]);
+
+  // Обработчик нажатия кнопки "Лайк" или "Удалить"
+  function handleLikeMovie() {
+    // Если фильм не сохранен, добавляем его в список сохраненных, иначе удаляем из списка
+    !isLiked ? savedMovieList(movie) : deleteMovieToList(movie);
   }
- 
-  function handleDeleteMovie(e) {
-    e.preventDefault();
-    props.onDeleteMovie(props.movie);
+
+  // Определяем класс кнопки в зависимости от того, сохранен ли фильм
+  const cardLikeButtonClassName = `movie__button ${
+    isLiked ? "movie__button_like" : "movie__button_dislike"
+  }`;
+
+  // Обработчик нажатия кнопки "Удалить" в разделе "Сохраненные фильмы"
+  function handleDeleteMovie() {
+    return deleteMovieToList(movie);
   }
- 
 
   return (
-    <section className="movie">
-      <div className="movie__container">
-        <div className="movie__info">
-          <h2 className="movie__name">{props.movie.nameRU}</h2>
-          <h2 className="movie__duration">
-            {hours ? `${hours}ч` : ""} {min ? `${min}м` : ""}
-          </h2>
+    <li className="movie">
+      <div className="movie_container">
+        <div>
+          <h2 className="movie__title">{movie.nameRU || movie.nameEN}</h2>
+          <p className="movie__duration">{convertTime(movie.duration)}</p>
         </div>
-        <button
-          type="button"
-          aria-label="Сохранить"
-          className={`movie__button ${location.pathname === "/movies" ? ButtonSaveClass : "movie__hidden"
-            }`}
-          onClick={handleSaveMovie}
-        />
-        <button
-          type="button"
-          aria-label="Сохранить"
-          className={`movie__button ${location.pathname === "/saved-movies"
-              ? "movie__close"
-              : "movie__hidden"
-            }`}
-          onClick={handleDeleteMovie}
-        />
+        {/* Отображаем кнопку "Лайк" или "Удалить" в зависимости от режима */}
+        {pathname === "/movies" ? (
+          <button
+            className={cardLikeButtonClassName}
+            type="button"
+            onClick={handleLikeMovie}
+          />
+        ) : (
+          <button
+            className="movie__button movie__button_delete"
+            type="button"
+            onClick={handleDeleteMovie}
+          />
+        )}
       </div>
-      <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer noopener">
         <img
-          className="movie__img"
-          alt={props.movie.nameRU || props.movie.nameEN}
-          src={
-            props.movie.image && props.movie.image.url
-              ? `${BASE__URL}${props.movie.image.url}`
-              : props.movie.image
-          }
+          className="movie__image"
+          alt={movie.nameRU || movie.nameEN}
+          src={movie.image.url ? `${API_URL}${movie.image.url}` : movie.image}
         />
       </a>
-       {/* <a href={props.movie.trailerLink} target="_blank" rel="noreferrer">
-        <img className="movie__img" src={`https://api.nomoreparties.co/${props.movie.image.url}`} alt="movieimage" />
-      </a> */}
-    </section>
+    </li>
   );
-}
+};
 
 export default MoviesCard;

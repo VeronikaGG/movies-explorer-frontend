@@ -1,59 +1,88 @@
-import { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
-import './SearchForm.css';
-import useFormValidation from "../hooks/useFormValidation";
-import loupe from "../../images/lope_w.svg";
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import React, { useState } from "react";
 
-function SearchForm(props) {
-  const {formValue, handleChange, setInput} = useFormValidation();
-  let location = useLocation();
+import "./SearchForm.css";
+import imageFind from "../../images/find.svg";
+import imageLope from "../../images/lope.svg";
 
-  useEffect(() => {
-    if (location.pathname === "/movies") {
-      setInput(localStorage.input);
-    } else {
-      setInput('');
-    }
-  }, []);
+const SearchForm = ({
+  moviesSearch,
+  setMoviesSearch,
+  isChecked,
+  setIsChecked,
+  handleSearchMovies,
+}) => {
+  const [inputError, setInputError] = useState(false);
+  // Обработчик изменения текста в поле ввода
+  const handleChange = (e) => {
+    setMoviesSearch(e.target.value);
+  };
 
-  function handleSubmit(e) {
+  // Обработчик нажатия кнопки "Поиск"
+  // const handleSubmit = (e) => {
+  //   if (!moviesSearch) return;
+  //   e.preventDefault();
+  //   handleSearchMovies(isChecked);
+  // };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.onMovieSearch({
-      input: formValue.movie,
-    });
-  }
+
+    if (!moviesSearch) {
+      setInputError(true); // Если поле ввода пустое, добавляем валидацию
+      return;
+    }
+
+    handleSearchMovies(isChecked); // Вызываем переданную функцию для выполнения поиска
+  };
+
+  // Обработчик переключения чекбокса "Короткометражки"
+  const handleCheckbox = () => {
+    handleSearchMovies(!isChecked); // Вызываем переданную функцию для выполнения фильтрации
+    setIsChecked(!isChecked); // Обновляем состояние чекбокса
+  };
+
   return (
     <>
-      <form 
-        className="search"
-        onSubmit={handleSubmit}
-      >
-        <div className="search__searcher">
-          <img className="search__loupe" src={loupe} alt="loupe" />
-          <input 
-            type="text" 
-            name="movie" 
-            value={formValue.movie}
-            onChange={handleChange}
+      <div className="searchform">
+        <form className="searchform__form" onSubmit={handleSubmit}>
+          <img src={imageLope} alt="Изображение лупы" />
+          <input
+            className={`searchform__input ${
+              inputError ? "searchform__input_error" : ""
+            }`}
+            type="text"
             placeholder="Фильм"
-            className="search__input" 
-          >
-          </input>
-          <button type="submit" className="search__submit"></button>
-        </div>
-        <div className="search__shorts">
-          <FilterCheckbox 
-            isChecked={props.isChecked} 
-            setIsChecked={props.setIsChecked}
-            onFilterCheckbox={props.onFilterCheckbox}
+            required
+            onChange={handleChange}
+            value={moviesSearch}
           />
-          <h2 className="search__text">Короткометражки</h2>
+          {inputError && (
+            <span className="searchform__input-error">
+              Нужно ввести ключевое слово
+            </span>
+          )}
+
+          <button type="submit" className="searchform__search">
+            <img src={imageFind} alt="Кнопка поиска" />
+          </button>
+        </form>
+        <div className="searchform__line"></div>
+        <div className="filter">
+          {/* Чекбокс "Короткометражки" */}
+          <label htmlFor="checkbox" className="filter__label">
+            <input
+              type="checkbox"
+              id="checkbox"
+              className="filter__checkbox-hidden"
+              checked={!isChecked} // Переключаем чекбокс в зависимости от состояния
+              onChange={handleCheckbox}
+            />
+            <span className="filter__checkbox-visible"></span>
+            <span className="filter__text">Короткометражки</span>
+          </label>
         </div>
-      </form>
-      <div className="search-line"></div>
+      </div>
     </>
   );
-}
+};
 
 export default SearchForm;
