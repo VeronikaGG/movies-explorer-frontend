@@ -4,8 +4,8 @@ import "./MoviesCardList.css";
 import { useLocation } from "react-router-dom";
 import Preloader from "../Preloader/Preloader";
 import {
-  SCREEN_WIDTH_768,
-  SCREEN_WIDTH_480,
+  SCREEN_WIDTH_1190,
+  SCREEN_WIDTH_750,
   LARGE_MOVIES_AMOUNT,
   MEDIUM_MOVIES_AMOUNT,
   SMALL_MOVIES_AMOUNT,
@@ -15,9 +15,9 @@ import {
 
 const MoviesCardList = ({
   movies,
-  savedMovieList,
   savedMovies,
-  deleteMovieToList,
+  saveMovieToSavedList,
+  deleteMovieFromSavedList,
   filtredMovies,
   isLoading,
 }) => {
@@ -27,14 +27,13 @@ const MoviesCardList = ({
 
   // Состояние для определения количества отображаемых фильмов на странице
   const [moviesPerPage, setMoviesPerPage] = useState(() => {
-    if (window.innerWidth >= SCREEN_WIDTH_768) return LARGE_MOVIES_AMOUNT;
+    if (window.innerWidth >= SCREEN_WIDTH_1190) return LARGE_MOVIES_AMOUNT;
     else if (
-      window.innerWidth < SCREEN_WIDTH_768 &&
-      window.innerWidth <= SCREEN_WIDTH_480
+      window.innerWidth < SCREEN_WIDTH_1190 &&
+      window.innerWidth >= SCREEN_WIDTH_750
     )
       return MEDIUM_MOVIES_AMOUNT;
-    else if (window.innerWidth < SCREEN_WIDTH_480) return SMALL_MOVIES_AMOUNT;
-    return 0;
+    else if (window.innerWidth < SCREEN_WIDTH_750) return SMALL_MOVIES_AMOUNT;
   });
 
   // Состояние для определения, показывать ли кнопку "Еще"
@@ -43,7 +42,11 @@ const MoviesCardList = ({
   // Обновляем количество отображаемых фильмов на странице при изменении списка фильмов
   useEffect(() => {
     updateMoviesPerPage();
-  }, [currentMoviesList]);
+    window.addEventListener("resize", updateMoviesPerPage);
+    return () => {
+      window.removeEventListener("resize", updateMoviesPerPage);
+    };
+  }, []);
 
   // Обновляем состояние показа кнопки "Еще" при изменении количества отображаемых фильмов на странице
   useEffect(() => {
@@ -56,22 +59,22 @@ const MoviesCardList = ({
 
   // Функция для обновления количества отображаемых фильмов на странице в зависимости от ширины окна
   function updateMoviesPerPage() {
-    if (window.innerWidth >= SCREEN_WIDTH_768)
+    if (window.innerWidth >= SCREEN_WIDTH_1190)
       return setMoviesPerPage(LARGE_MOVIES_AMOUNT);
     else if (
-      window.innerWidth < SCREEN_WIDTH_768 &&
-      window.innerWidth <= SCREEN_WIDTH_480
+      window.innerWidth < SCREEN_WIDTH_1190 &&
+      window.innerWidth >= SCREEN_WIDTH_750
     )
       return setMoviesPerPage(MEDIUM_MOVIES_AMOUNT);
-    else if (window.innerWidth < SCREEN_WIDTH_480)
+    else if (window.innerWidth < SCREEN_WIDTH_750)
       return setMoviesPerPage(SMALL_MOVIES_AMOUNT);
   }
 
   // Функция для обработки клика по кнопке "Еще" и отображения дополнительных фильмов
-  function handlePagination() {
-    if (window.innerWidth >= SCREEN_WIDTH_768)
+  function increaseMoviesPerPage() {
+    if (window.innerWidth >= SCREEN_WIDTH_1190)
       return setMoviesPerPage(moviesPerPage + ADDITIONAL_LARGE_MOVIES_AMOUNT);
-    else if (window.innerWidth < SCREEN_WIDTH_768)
+    else if (window.innerWidth < SCREEN_WIDTH_1190)
       return setMoviesPerPage(moviesPerPage + ADDITIONAL_SMALL_MOVIES_AMOUNT);
   }
 
@@ -89,10 +92,10 @@ const MoviesCardList = ({
           {currentMoviesList.slice(0, moviesPerPage).map((movie) => (
             <MoviesCard
               movie={movie}
-              filtredMovies={filtredMovies}
-              savedMovieList={savedMovieList}
               savedMovies={savedMovies}
-              deleteMovieToList={deleteMovieToList}
+              filtredMovies={filtredMovies}
+              saveMovieToSavedList={saveMovieToSavedList}
+              deleteMovieFromSavedList={deleteMovieFromSavedList}
               key={movie.id || movie.movieId}
             />
           ))}
@@ -104,7 +107,7 @@ const MoviesCardList = ({
         <button
           className="cards__button"
           type="button"
-          onClick={handlePagination}
+          onClick={increaseMoviesPerPage}
         >
           Еще
         </button>

@@ -20,7 +20,7 @@
   border-bottom: 1px solid #000000;
   text-align: left;
 }
-.about__main {
+.about__content {
   margin-top: 66px;
   width: 100%;
   display: flex;
@@ -42,7 +42,7 @@
   letter-spacing: -0.04em;
   color: #000000;
 }
-.about__profession {
+.about__occupation {
   margin: 0;
   margin: 18px 0 26px;
   font-weight: 500;
@@ -59,6 +59,7 @@
   line-height: 22px;
   color: #000000;
   mix-blend-mode: normal;
+  padding-right: 48px;
 }
 .about__link {
   margin: 0;
@@ -69,11 +70,12 @@
   margin-top: auto;
   text-decoration: none;
 }
-.about__img {
+.about__image {
   width: 270px;
   height: 327px;
   border-radius: 10px;
 }
+/* Медиа-запрос для экранов меньше 880px */
 @media screen and (max-width: 880px) {
   .about {
     margin: 90px 50px 90px;
@@ -83,21 +85,21 @@
     font-size: 40px;
     line-height: 40px;
   }
-  .about__profession {
+  .about__occupation {
     margin: 16px 0 20px;
     font-size: 12px;
     line-height: 18px;
   }
   .about__text {
-    max-width: 364px;
     font-size: 12px;
     line-height: 18px;
   }
-  .about__img {
+  .about__image {
     width: 255px;
     height: 307px;
   }
 }
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .about {
     margin: 50px 14px 70px;
@@ -107,7 +109,7 @@
     font-size: 18px;
     line-height: 22px;
   }
-  .about__main {
+  .about__content {
     margin-top: 60px;
     flex-direction: column-reverse;
     justify-content: center;
@@ -118,20 +120,20 @@
     font-size: 30px;
     line-height: 36px;
   }
-  .about__profession {
+  .about__occupation {
     margin: 20px 0 20px;
     font-size: 11px;
     line-height: 16px;
   }
   .about__text {
-    width: 100%;
     font-size: 11px;
     line-height: 16px;
+    padding-right: 0;
   }
   .about__link {
     margin-top: 40px;
   }
-  .about__img {
+  .about__image {
     width: 292px;
     height: 352px;
   }

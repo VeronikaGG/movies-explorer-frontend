@@ -20,13 +20,13 @@ const Form = ({
   const navigate = useNavigate();
 
   // Используем кастомный хук useFormValidation для управления состоянием формы
-  const { values, handleChange, errors, isValid, resetForm } =
+  const { formValues, handleFormChange, formErrors, isFormValid, resetForm } =
     useFormValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid) {
-      onSubmit(values);
+    if (isFormValid) {
+      onSubmit(formValues);
     }
   };
 
@@ -56,20 +56,20 @@ const Form = ({
               }`}
               type="text"
               name="name"
-              value={values.name || ""}
-              onChange={handleChange}
+              value={formValues.name || ""}
+              onChange={handleFormChange}
               placeholder="Имя"
               required
               minLength="2"
               maxLength="30"
-              pattern="^[a-zA-Zа-яёА-ЯЁ -]+$"
+              pattern="/^[a-zA-Zа-яёА-ЯЁ -]+$/"
             />
             <span
               className={`form__input-error ${
-                errors.name && "form__input-error_active"
+                formErrors.name && "form__input-error_active"
               }`}
             >
-              {errors.name || ""}
+              {formErrors.name || ""}
             </span>
           </>
         )}
@@ -78,18 +78,18 @@ const Form = ({
           className={`form__input ${isLoading ? "form__input_disabled" : ""}`}
           type="email"
           name="email"
-          value={values.email || ""}
-          onChange={handleChange}
+          value={formValues.email || ""}
+          onChange={handleFormChange}
           placeholder="Email"
           required
           pattern="^\S+@\S+\.\S+$"
         />
         <span
           className={`form__input-error ${
-            errors.email && "form__input-error_active"
+            formErrors.email && "form__input-error_active"
           }`}
         >
-          {errors.email || ""}
+          {formErrors.email || ""}
         </span>
         <label className="form__label">Пароль</label>
         <input
@@ -97,25 +97,25 @@ const Form = ({
           type="password"
           name="password"
           minLength="6"
-          value={values.password || ""}
-          onChange={handleChange}
+          value={formValues.password || ""}
+          onChange={handleFormChange}
           placeholder="Пароль"
           required
         />
         <span
           className={`form__input-error ${
-            errors.password && "form__input-error_active"
+            formErrors.password && "form__input-error_active"
           }`}
         >
-          {errors.password || ""}
+          {formErrors.password || ""}
         </span>
         <button
           className={`form__submit-button links ${
-            !isValid && "form__submit-button_disabled"
+            !isFormValid && "form__submit-button_disabled"
           } 
 					${isRegisterForm ? "" : "form__submit-button_margin"}`}
           type="submit"
-          disabled={!isValid}
+          disabled={!isFormValid}
         >
           {submitButtonText}
         </button>

@@ -2,7 +2,6 @@
   margin: 0 auto;
   max-width: 396px;
   padding: 70px 0;
-  min-height: 100vh;
   text-align: left;
 }
 .form__title {
@@ -49,7 +48,7 @@
   margin-bottom: 20px;
 }
 .form__submit-button {
-  margin: 49px 0 16px;
+  margin: 72px 0 16px;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
@@ -69,7 +68,7 @@
   cursor: not-allowed;
 }
 .form__submit-button_margin {
-  margin-top: 137px;
+  margin-top: 160px;
 }
 .form__question {
   margin: 0;
@@ -86,24 +85,19 @@
   text-decoration: none;
 }
 .form__input-error {
-  padding-top: 5px;
-  min-height: 25px;
+  display: flex;
+  min-height: 20px;
   color: #ee3465;
   font-size: 10px;
   line-height: 12px;
   font-weight: 400;
-  opacity: 0;
-  transition: all 0.5s ease;
+  align-items: end;
 }
 .form__input-error_active {
   opacity: 1;
 }
-@media (max-width: 768px) {
-  .form {
-    padding: 232px 0;
-  }
-}
-@media (max-width: 440px) {
+/* Медиа-запрос для экранов меньше 580px */
+@media (max-width: 580px) {
   .form {
     padding: 56px 0 30px;
     text-align: center;
@@ -116,8 +110,9 @@
     text-align: left;
   }
   .form__submit-button {
-    margin: 137px 0 14px;
+    margin: 158px 0 14px;
     padding: 15px 67px;
+    font-size: 12px;
   }
   .form__question {
     font-size: 12px;
@@ -125,5 +120,8 @@
   }
   .form__link {
     margin-left: 7px;
+  }
+  .form__submit-button_margin {
+    margin-top: 246px;
   }
 }

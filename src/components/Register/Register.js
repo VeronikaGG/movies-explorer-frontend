@@ -1,6 +1,6 @@
 import Form from "../Form/Form";
 
-const Register = ({ handleSignUp, isLoading }) => {
+const Register = ({ handleRegistration, isLoading }) => {
   return (
     <Form
       formTitle="Добро пожаловать!"
@@ -9,7 +9,7 @@ const Register = ({ handleSignUp, isLoading }) => {
       linkText="Войти"
       linkTo="/signin"
       isRegisterForm={true}
-      onSubmit={handleSignUp}
+      onSubmit={handleRegistration}
       isLoading={isLoading}
     />
   );

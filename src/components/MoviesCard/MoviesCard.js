@@ -6,14 +6,14 @@ import { API_URL } from "../../utils/сonstants";
 const MoviesCard = ({
   movie,
   savedMovies,
-  savedMovieList,
-  deleteMovieToList,
+  saveMovieToSavedList,
+  deleteMovieFromSavedList,
 }) => {
   // Получаем текущий путь из URL для определения режима отображения кнопок
   const { pathname } = useLocation();
 
   // Функция для конвертации длительности фильма в удобный формат
-  const convertTime = (length) => {
+  const formatMovieDuration = (length) => {
     if (length >= 60) {
       return `${Math.floor(length / 60)}ч ${length % 60}м`;
     }
@@ -26,9 +26,9 @@ const MoviesCard = ({
   }, [movie, savedMovies]);
 
   // Обработчик нажатия кнопки "Лайк" или "Удалить"
-  function handleLikeMovie() {
+  function toggleMovieLike() {
     // Если фильм не сохранен, добавляем его в список сохраненных, иначе удаляем из списка
-    !isLiked ? savedMovieList(movie) : deleteMovieToList(movie);
+    !isLiked ? saveMovieToSavedList(movie) : deleteMovieFromSavedList(movie);
   }
 
   // Определяем класс кнопки в зависимости от того, сохранен ли фильм
@@ -37,8 +37,8 @@ const MoviesCard = ({
   }`;
 
   // Обработчик нажатия кнопки "Удалить" в разделе "Сохраненные фильмы"
-  function handleDeleteMovie() {
-    return deleteMovieToList(movie);
+  function handleRemoveSavedMovie() {
+    return deleteMovieFromSavedList(movie);
   }
 
   return (
@@ -46,20 +46,22 @@ const MoviesCard = ({
       <div className="movie_container">
         <div>
           <h2 className="movie__title">{movie.nameRU || movie.nameEN}</h2>
-          <p className="movie__duration">{convertTime(movie.duration)}</p>
+          <p className="movie__duration">
+            {formatMovieDuration(movie.duration)}
+          </p>
         </div>
         {/* Отображаем кнопку "Лайк" или "Удалить" в зависимости от режима */}
         {pathname === "/movies" ? (
           <button
             className={cardLikeButtonClassName}
             type="button"
-            onClick={handleLikeMovie}
+            onClick={toggleMovieLike}
           />
         ) : (
           <button
             className="movie__button movie__button_delete"
             type="button"
-            onClick={handleDeleteMovie}
+            onClick={handleRemoveSavedMovie}
           />
         )}
       </div>

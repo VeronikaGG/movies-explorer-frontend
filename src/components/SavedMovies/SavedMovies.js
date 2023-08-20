@@ -5,23 +5,23 @@ import { SHORT_FILM_DURATION } from "../../utils/сonstants";
 
 const SavedMovies = ({
   isLoading: isLoadingSaved,
-  savedMovieList,
+  saveMovieToSavedList,
   savedMovies: savedMoviesList,
-  deleteMovieToList,
+  deleteMovieFromSavedList,
 }) => {
   // Состояние для управления чекбоксом "Короткометражки"
   const [isChecked, setIsChecked] = useState(true);
 
   // Состояние для хранения значения поискового запроса
-  const [moviesSearch, setMoviesSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Состояние для хранения отфильтрованных фильмов
   const [filterString, setFilterString] = useState("");
 
   // Обработчик для установки значения поискового запроса в состояние filterString
-  const handleSearchMovies = useCallback(() => {
-    setFilterString(moviesSearch);
-  }, [moviesSearch]);
+  const updateFilterString = useCallback(() => {
+    setFilterString(searchQuery);
+  }, [searchQuery]);
 
   // Мемоизированный список отфильтрованных фильмов
   const filtredMovies = useMemo(() => {
@@ -39,9 +39,9 @@ const SavedMovies = ({
     <>
       {/* Компонент поисковой формы */}
       <SearchForm
-        moviesSearch={moviesSearch}
-        setMoviesSearch={setMoviesSearch}
-        handleSearchMovies={handleSearchMovies}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleSearchMoviesButton={updateFilterString}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
@@ -50,10 +50,10 @@ const SavedMovies = ({
       <MoviesCardList
         isLoading={isLoadingSaved}
         filtredMovies={filtredMovies}
-        savedMovieList={savedMovieList}
+        saveMovieToSavedList={saveMovieToSavedList}
         savedMovies={savedMoviesList}
-        deleteMovieToList={deleteMovieToList}
-        handleSearchMovies={handleSearchMovies}
+        deleteMovieFromSavedList={deleteMovieFromSavedList}
+        handleSearchMoviesButton={updateFilterString}
       />
       <div className="save-movie_box"></div>
     </>

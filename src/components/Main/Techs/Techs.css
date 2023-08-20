@@ -75,6 +75,7 @@
   align-items: center;
   justify-content: center;
 }
+/* Медиа-запрос для экранов меньше 880px */
 @media screen and (max-width: 880px) {
   .techs__name {
     padding-bottom: 23px;
@@ -102,6 +103,7 @@
     line-height: 15px;
   }
 }
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .techs {
     margin: 0 18px 0;

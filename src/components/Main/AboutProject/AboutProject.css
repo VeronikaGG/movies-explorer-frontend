@@ -1,5 +1,5 @@
 .project {
-  padding: 108px 70px;
+  padding: 110px 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@
   border-bottom: 1px solid #000000;
   text-align: left;
 }
-.project__columns {
+.project__container {
   margin-top: 70px;
   display: flex;
   flex-direction: row;
@@ -83,12 +83,13 @@
   text-align: center;
   color: #a0a0a0;
 }
+/* Медиа-запрос для экранов меньше 880px */
 @media screen and (max-width: 880px) {
   .project {
     margin: 90px 50px 104px;
     padding: 0 0 76px;
   }
-  .project__columns {
+  .project__container {
     margin-top: 69px;
     column-gap: 38px;
   }
@@ -104,6 +105,7 @@
     grid-template-columns: 1fr 3.77fr;
   }
 }
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .project {
     margin: 70px 18px 70px;
@@ -114,7 +116,7 @@
     font-size: 18px;
     line-height: 22px;
   }
-  .project__columns {
+  .project__container {
     flex-direction: column;
     row-gap: 56px;
     margin-top: 60px;

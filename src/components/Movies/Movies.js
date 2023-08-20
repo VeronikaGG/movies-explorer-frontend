@@ -1,75 +1,85 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import { SHORT_FILM_DURATION } from "../../utils/сonstants";
 
 const Movies = ({
   isLoading,
-  savedMovieList,
-  deleteMovieToList,
+  saveMovieToSavedList,
+  deleteMovieFromSavedList,
   savedMovies,
   allMovies,
 }) => {
   // Состояние для управления чекбоксом "Короткометражки"
   const [isChecked, setIsChecked] = useState(
-    localStorage.getItem("isShort") === "true"
+    localStorage.getItem("isShortChecked") === "true" || true
   );
-
+  const [inputError, setInputError] = useState(false); // Состояние для отображения ошибки ввода
   // Состояние для хранения значения поискового запроса
-  const [moviesSearch, setMoviesSearch] = useState(
-    localStorage.getItem("moviesSearch") || ""
+  const [searchQuery, setSearchQuery] = useState(
+    localStorage.getItem("searchQuery") || ""
   );
-
   // Состояние для хранения отфильтрованных фильмов
-  const [filteredMovies, setFilteredMovies] = useState(
-    localStorage.getItem("filteredMovies")
-      ? JSON.parse(localStorage.getItem("filteredMovies"))
+  const [filteredMoviesData, setFilteredMoviesData] = useState(
+    localStorage.getItem("filteredMoviesData")
+      ? JSON.parse(localStorage.getItem("filteredMoviesData"))
       : []
   );
 
-  // Обработчик для фильтрации фильмов и сохранения результатов в состояние filteredMovies и в localStorage
+  // Обработчик для фильтрации фильмов и сохранения результатов в состояние filteredMoviesData и в localStorage
   function handleSearchMoviesButton(isChecked) {
-    const movies = allMovies.filter((movie) => {
-      const filteredMovieInclude =
-        movie.nameRU.toLowerCase().includes(moviesSearch.toLowerCase()) ||
-        movie.nameEN.toLowerCase().includes(moviesSearch.toLowerCase());
-
-      return isChecked
-        ? filteredMovieInclude
-        : movie.duration < SHORT_FILM_DURATION && filteredMovieInclude;
-    });
-
-    setFilteredMovies(movies);
-    localStorage.setItem("isShort", isChecked.toString());
-    localStorage.setItem("filteredMovies", JSON.stringify(movies));
-    localStorage.setItem("moviesSearch", moviesSearch);
+    if (!searchQuery) {
+      setInputError(true); // Если поле ввода пустое, добавляем валидацию
+      return;
+    } else {
+      setInputError(false);
+      const movies = allMovies.filter((movie) => {
+        const filteredMovieInclude =
+          movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          movie.nameEN.toLowerCase().includes(searchQuery.toLowerCase());
+        return isChecked
+          ? filteredMovieInclude
+          : movie.duration < SHORT_FILM_DURATION && filteredMovieInclude;
+      });
+      setFilteredMoviesData(movies);
+      localStorage.setItem("isShortChecked", isChecked.toString());
+      localStorage.setItem("filteredMoviesData", JSON.stringify(movies));
+      localStorage.setItem("searchQuery", searchQuery);
+    }
   }
 
   // Эффект для обновления значения чекбокса в localStorage при его изменении
   useEffect(() => {
-    localStorage.setItem("isShort", isChecked.toString());
+    localStorage.setItem("isShortChecked", isChecked.toString());
   }, [isChecked]);
 
   return (
     <>
       {/* Компонент поисковой формы */}
       <SearchForm
-        moviesSearch={moviesSearch}
-        setMoviesSearch={setMoviesSearch}
-        handleSearchMovies={handleSearchMoviesButton}
+        inputError={inputError}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleSearchMoviesButton={handleSearchMoviesButton}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
-
+      {inputError && (
+        <span className="searchform__input-error">
+          Нужно ввести ключевое слово
+        </span>
+      )}
       {/* Компонент списка фильмов */}
-      <MoviesCardList
-        isLoading={isLoading}
-        savedMovieList={savedMovieList}
-        savedMovies={savedMovies}
-        deleteMovieToList={deleteMovieToList}
-        movies={filteredMovies}
-        filtredMovies={filteredMovies}
-      />
+      {!inputError && (
+        <MoviesCardList
+          isLoading={isLoading}
+          saveMovieToSavedList={saveMovieToSavedList}
+          savedMovies={savedMovies}
+          deleteMovieFromSavedList={deleteMovieFromSavedList}
+          movies={filteredMoviesData}
+          filtredMovies={filteredMoviesData}
+        />
+      )}
     </>
   );
 };

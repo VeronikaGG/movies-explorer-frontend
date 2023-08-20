@@ -1,15 +1,15 @@
 import React from "react";
 import "./AboutMe.css";
-import me from "../../../images/myface.jpeg";
+import myPhoto from "../../../images/myface.jpeg";
 
-function AboutMe() {
+function AboutMeSection() {
   return (
     <section className="about" id="about">
       <h2 className="about__title">Студент</h2>
-      <div className="about__main">
+      <div className="about__content">
         <div className="about__info">
           <h2 className="about__name">Вероника</h2>
-          <h3 className="about__profession">Фронтенд-разработчик, 32 года</h3>
+          <h3 className="about__occupation">Фронтенд-разработчик, 32 года</h3>
           <h3 className="about__text">
             Я&nbsp;живу в&nbsp;городе Котельники, Московской области, закончила
             институт ВГУЮ (РПА Минюста России) по специальности юриспруденция.
@@ -29,10 +29,9 @@ function AboutMe() {
             Github
           </a>
         </div>
-        <img className="about__img" src={me} alt="Me"></img>
+        <img className="about__image" src={myPhoto} alt="Моя фотография"></img>
       </div>
     </section>
   );
 }
-
-export default AboutMe;
+export default AboutMeSection;

@@ -6,7 +6,7 @@
 }
 .promo__content {
   display: flex;
-  margin: 71px 70px 0;
+  margin: 74px 70px 0;
   justify-content: space-between;
 }
 .promo__logo {
@@ -14,14 +14,14 @@
   height: 304px;
 }
 .promo__title {
-  max-width: 640px;
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
   color: #fff;
   margin: 0;
   text-align: left;
-  margin-right: 190px;
+  margin-right: auto;
+  max-width: 640px;
 }
 .promo__caption {
   text-align: left;
@@ -32,6 +32,7 @@
   line-height: 16px;
   color: rgba(255, 255, 255, 0.5);
 }
+/* Медиа-запрос для экранов меньше 880px */
 @media screen and (max-width: 880px) {
   .promo__content {
     flex-direction: column;
@@ -59,6 +60,7 @@
     align-items: center;
   }
 }
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .promo__logo {
     width: 210px;
@@ -71,6 +73,6 @@
     letter-spacing: -1.2px;
   }
   .promo__content {
-    margin: 66px 0 0;
+    margin: 72px 0 0;
   }
 }

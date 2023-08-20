@@ -2,35 +2,39 @@ import { useCallback, useState } from "react";
 
 function useFormValidation() {
   // Состояние для хранения значений полей формы
-  const [values, setValues] = useState({});
+  const [formValues, setFormValues] = useState({});
 
   // Состояние для хранения ошибок валидации полей формы
-  const [errors, setErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({});
 
   // Состояние для хранения информации о валидности всей формы
-  const [isValid, setIsValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   // Обработчик изменения значений полей формы
-  const handleChange = (e) => {
+  const handleFormChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    setValues({ ...values, [name]: value }); // Обновляем значения полей формы
-    setErrors({ ...errors, [name]: e.target.validationMessage }); // Обновляем ошибки валидации
-    setIsValid(e.target.closest("form").checkValidity()); // Проверяем валидность всей формы
+    setFormValues({ ...formValues, [name]: value }); // Обновляем значения полей формы
+    setFormErrors({ ...formErrors, [name]: e.target.validationMessage }); // Обновляем ошибки валидации
+    setIsFormValid(e.target.closest("form").checkValidity()); // Проверяем валидность всей формы
   };
-
   // Функция сброса формы в начальное состояние
   const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
+    (newFormValues = {}, newFormErrors = {}, newIsFormValid = false) => {
+      setFormValues(newFormValues);
+      setFormErrors(newFormErrors);
+      setIsFormValid(newIsFormValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setFormValues, setFormErrors, setIsFormValid]
   );
-
   // Возвращаем значения и функции для работы с формой
-  return { values, handleChange, errors, isValid, setIsValid, resetForm };
+  return {
+    formValues,
+    handleFormChange,
+    formErrors,
+    isFormValid,
+    setIsFormValid,
+    resetForm,
+  };
 }
-
 export default useFormValidation;

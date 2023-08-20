@@ -3,7 +3,6 @@ import "./NavTab.css";
 
 function NavTab() {
   const linkText = "Узнать больше";
-
   return (
     <nav className="navtab">
       <a href="#project" className="navtab__link-text">
@@ -12,5 +11,4 @@ function NavTab() {
     </nav>
   );
 }
-
 export default NavTab;

@@ -5,7 +5,7 @@ function AboutProject() {
   return (
     <section className="project" id="project">
       <h2 className="project__name">О проекте</h2>
-      <div className="project__columns">
+      <div className="project__container">
         <div className="project__column">
           <h2 className="project__title">Дипломный проект включал 5 этапов</h2>
           <h3 className="project__text">
@@ -32,5 +32,4 @@ function AboutProject() {
     </section>
   );
 }
-
 export default AboutProject;
