@@ -14,12 +14,10 @@ const Form = ({
   isRegisterForm,
   isLoggedIn,
   onSubmit,
-  isLoading,
 }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  // Используем кастомный хук useFormValidation для управления состоянием формы
   const { formValues, handleFormChange, formErrors, isFormValid, resetForm } =
     useFormValidation();
 
@@ -30,12 +28,10 @@ const Form = ({
     }
   };
 
-  // Сбрасываем форму, если пользователь успешно авторизовался
   useEffect(() => {
     if (isLoggedIn) resetForm();
   }, [isLoggedIn, resetForm]);
 
-  // Перенаправляем пользователя на главную страницу после успешной авторизации
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/movies", { replace: true });
@@ -51,9 +47,7 @@ const Form = ({
           <>
             <label className="form__label">Имя</label>
             <input
-              className={`form__input ${
-                isLoading ? "form__input_disabled" : ""
-              }`}
+              className={`form__input`}
               type="text"
               name="name"
               value={formValues.name || ""}
@@ -75,7 +69,7 @@ const Form = ({
         )}
         <label className="form__label">E-mail</label>
         <input
-          className={`form__input ${isLoading ? "form__input_disabled" : ""}`}
+          className={`form__input`}
           type="email"
           name="email"
           value={formValues.email || ""}
@@ -93,7 +87,7 @@ const Form = ({
         </span>
         <label className="form__label">Пароль</label>
         <input
-          className={`form__input ${isLoading ? "form__input_disabled" : ""}`}
+          className={`form__input`}
           type="password"
           name="password"
           minLength="6"
@@ -112,8 +106,8 @@ const Form = ({
         <button
           className={`form__submit-button links ${
             !isFormValid && "form__submit-button_disabled"
-          } 
-					${isRegisterForm ? "" : "form__submit-button_margin"}`}
+          }
+ 					${isRegisterForm ? "" : "form__submit-button_margin"}`}
           type="submit"
           disabled={!isFormValid}
         >

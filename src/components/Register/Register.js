@@ -10,7 +10,6 @@ const Register = ({ handleRegistration, isLoading }) => {
       linkTo="/signin"
       isRegisterForm={true}
       onSubmit={handleRegistration}
-      isLoading={isLoading}
     />
   );
 };

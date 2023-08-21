@@ -10,7 +10,6 @@ const Login = ({ handleLogin, isLoading }) => {
       linkTo="/signup"
       isRegisterForm={false}
       onSubmit={handleLogin}
-      isLoading={isLoading}
     />
   );
 };
