@@ -7,12 +7,11 @@
   align-items: center;
   text-align: center;
   box-sizing: border-box;
-  background: #f8f8f8;
+  background: #fafafa;
 }
-
 .footer__title {
   margin: 0;
-  margin-top: 20px;
+  padding-top: 79px;
   padding-bottom: 20px;
   width: 100%;
   font-weight: 400;
@@ -22,7 +21,6 @@
   color: #a0a0a0;
   border-bottom: 1px solid #e8e8e8;
 }
-
 .footer__info {
   width: 100%;
   padding: 20px 0 20px;
@@ -30,7 +28,6 @@
   flex-direction: row;
   justify-content: space-between;
 }
-
 .footer__copyright {
   margin: 0;
   font-weight: 400;
@@ -38,14 +35,12 @@
   line-height: 16px;
   color: #000000;
 }
-
 .footer__links {
   margin: 0;
   display: flex;
   flex-direction: row;
   column-gap: 20px;
 }
-
 .footer__link {
   font-weight: 400;
   font-size: 13px;
@@ -53,23 +48,27 @@
   color: #000000;
   text-decoration: none;
 }
+/* Медиа-запрос для экранов меньше 880px */
 @media screen and (max-width: 880px) {
   .footer {
     padding: 0 30px 0;
+    background: none;
+  }
+  .footer__title {
+    padding-top: 36px;
   }
 }
-
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .footer {
     min-height: 253px;
     margin: 0 10px 0;
     padding: 0;
-    background: #fafafa;
   }
   .footer__title {
     font-size: 12px;
     line-height: 15px;
-    margin-top: 100px;
+    padding-top: 108px;
   }
   .footer__info {
     padding: 30px 0 20px;

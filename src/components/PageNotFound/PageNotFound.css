@@ -40,11 +40,12 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #3456f3;
+  color: #ff6838;
   background-color: none;
   text-decoration: none;
 }
-@media screen and (max-width: 850px) {
+/* Медиа-запрос для экранов меньше 880px */
+@media screen and (max-width: 880px) {
   .notfound__404 {
     margin: 370px 0 0;
   }
@@ -52,6 +53,7 @@
     margin-bottom: 222px;
   }
 }
+/* Медиа-запрос для экранов меньше 580px */
 @media screen and (max-width: 580px) {
   .notfound {
     height: 780px;

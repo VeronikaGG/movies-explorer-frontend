@@ -1,0 +1,73 @@
+.movie {
+  min-width: 364px;
+  min-height: 271px;
+  list-style-type: none;
+  background-color: #fff;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+.movie_container {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+.movie__title {
+  margin: 0 0 9px 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: 500;
+  color: #000;
+  text-align: start;
+}
+.movie__duration {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 400;
+  color: #a0a0a0;
+  text-align: start;
+}
+.movie__image {
+  width: 364px;
+  height: 203px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.movie__button {
+  margin: 0;
+  padding: 0;
+  min-width: 30px;
+  min-height: 30px;
+  border: none;
+  cursor: pointer;
+}
+.movie__button_like {
+  background: url("../../images/buttomsave_active.svg") center no-repeat;
+}
+.movie__button_dislike {
+  background: url("../../images/buttom-save_w.svg") center no-repeat;
+}
+.movie__button_delete {
+  background: url("../../images/close.svg") center no-repeat;
+}
+@media (max-width: 1190px) {
+  .movie {
+    min-width: 339px;
+    min-height: 258px;
+  }
+  .movie__image {
+    width: 339px;
+    height: 190px;
+  }
+}
+@media (max-width: 750px) {
+  .movie {
+    min-width: 300px;
+    min-height: 236px;
+  }
+  .movie__image {
+    width: 300px;
+    height: 168px;
+  }
+}

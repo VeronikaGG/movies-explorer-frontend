@@ -1,150 +1,141 @@
 .profile {
-  margin: 72px auto 0;
-  padding-bottom: 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 54px 0 70px;
+  background-color: #fff;
 }
-
 .profile__form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  width: 410px;
-  height: 417px;
+  max-width: 410px;
+  margin: 0 auto;
 }
-
-.profile__inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
 .profile__title {
-  margin: 0 0 106px;
-  font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  text-align: center;
-  color: #000000;
-}
-
-.profile__input {
-  width: 100%;
-  position: relative;
-}
-
-.profile__lable {
-  position: absolute;
-  margin-top: 17px;
   font-weight: 500;
-  font-size: 11px;
-  line-height: 13px;
-  color: #000000;
-}
-
-.profile__field {
-  width: 100%;
-  padding: 17px 0 16px;
-  border: none;
-  border-bottom: 1px solid #e8e8e8;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 13px;
-  text-align: right;
-  color: #000000;
-  background: transparent;
-}
-
-.profile__field-last {
-  border: none;
-}
-
-.profile__span {
-  width: 100%;
-  margin: 8px 0 8px;
-  height: 12px;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  color: #ff3055;
-}
-
-.profile__submit {
-  margin-top: auto;
-  width: 396px;
-  height: 45px;
-  cursor: pointer;
-  background-color: #3456f3;
-  border: none;
-  border-radius: 3px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  margin-bottom: 122px;
   text-align: center;
-  color: #ffffff;
-  display: none;
 }
-
-.profile__bottom {
+.profile__content {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 17px;
+  width: 410px;
+  height: 20px;
 }
-
-.profile__link {
+.profile__button_edit {
+  margin-top: 25px;
+}
+.auth__input-error_email {
+  margin-bottom: 150px;
+}
+.auth__input-error_active {
+  color: #ee3465;
+  font-size: 10px;
   font-weight: 400;
+  line-height: 12px;
+}
+.profile__span_visible {
+  font-size: 18px;
+  line-height: 13px;
+  font-weight: 500;
+  color: green;
+  position: relative;
+  top: -20px;
+}
+.profile__label {
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+}
+.profile__input {
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 400;
+  border: none;
+  color: #000;
+  width: 200px;
+  text-align: right;
+  background-color: #fff;
+}
+.profile__input_disabled {
+  cursor: default;
+  pointer-events: none;
+}
+.profile__line {
+  width: 410px;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.profile__button {
   font-size: 13px;
   line-height: 16px;
-  display: flex;
-  text-align: center;
-  color: #000000;
-  text-decoration: none;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  margin: 21px 0 0 0;
+  padding: 0;
 }
-
-.profile__link-red {
-  color: #ff3055;
+.profile__submit-button {
+  width: 410px;
+  min-height: 45px;
+  background-color: #ff6838;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
 }
-
-@media screen and (max-width: 850px) {
-  .profile {
-    margin: 232px auto 0;
-    padding-bottom: 269px;
+.profile__submit-button_disabled {
+  visibility: hidden;
+}
+.profile__submit-button_inactive {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.profile__submit-button_inactive:hover {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.profile__button_exit {
+  color: #ee3465;
+  margin-top: 16px;
+}
+/* Медиа-запрос для экранов меньше 880px */
+@media (max-width: 880px) {
+  .profile__button {
+    margin: 13px 0 0 0;
   }
-  .profile__form {
-    height: 380px;
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+}
+/* Медиа-запрос для экранов меньше 580px */
+@media (max-width: 580px) {
+  .profile {
+    padding: 53px 0 40px;
   }
   .profile__title {
-    margin: 0 0 79px;
+    margin-bottom: 78px;
   }
-}
-
-@media screen and (max-width: 550px) {
-  .profile {
-    margin: 68px auto 40px;
-    justify-content: start;
-    height: 780px;
-  }
-  .profile__form {
+  .profile__content {
     width: 260px;
   }
-  .profile__title {
-    margin: 0 0 64px;
-  }
-  .profile__submit {
+  .profile__line {
     width: 260px;
   }
-  .profile__bottom {
-    margin-top: 170px;
+  .profile__submit-button {
+    width: 260px;
+    min-height: 40px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 174px;
   }
-  .profile__link {
+  .profile__button {
     font-size: 12px;
-    line-height: 15px;
   }
 }
